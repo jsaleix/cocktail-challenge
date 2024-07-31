@@ -38,6 +38,7 @@ export default function BuilderInput({ suggestions }: Props) {
                     name={i}
                     key={i}
                     showCross
+                    bgColor="green-btn"
                   />
                 ))}
               </div>

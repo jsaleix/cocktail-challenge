@@ -6,7 +6,6 @@ import BuilderOutput from "./builder-output";
 import { useEffect } from "react";
 import { useBuilderContext } from "@/components/context/builder.context";
 import { debounce } from "@/lib/utils";
-import { IngredientInList } from "@/lib/types/cocktail";
 
 interface Props {
   suggestions: string[];
