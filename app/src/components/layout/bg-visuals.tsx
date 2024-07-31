@@ -29,7 +29,7 @@ export default function BGVisuals() {
       />
       <div
         id="bg-image"
-        className={"absolute top-0 left-0 w-full h-full pointer-events-none"}
+        className={"fixed top-0 left-0 w-screen h-screen pointer-events-none"}
         style={{
           opacity: 0.3,
           backgroundImage: "url('/background.jpg')",

@@ -1,15 +1,20 @@
 "use client";
 import SearchInput from "@/components/common/search-input";
 import { IngredientInList } from "@/lib/types/cocktail";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import IngredientItem from "./ingredient-item";
-import { debounce } from "@/lib/utils";
 import { useBuilderContext } from "@/components/context/builder.context";
 
-interface Props {}
+interface Props {
+  suggestions: string[];
+}
 
-export default function BuilderInput({}: Props) {
-  const { selectedIngredients, removeIngredient } = useBuilderContext();
+export default function BuilderInput({ suggestions }: Props) {
+  const { selectedIngredients, removeIngredient, addIngredient } =
+    useBuilderContext();
+  const filteredSuggestions = useMemo(() => {
+    return suggestions.filter((s) => !selectedIngredients.includes(s.toLowerCase()));
+  }, [suggestions, selectedIngredients]);
 
   return (
     <section className="min-h-4/5 w-full md:w-1/3 bg-light-blue rounded rounded-md shadow-2xl">
@@ -32,6 +37,7 @@ export default function BuilderInput({}: Props) {
                     onClick={() => removeIngredient(i)}
                     name={i}
                     key={i}
+                    showCross
                   />
                 ))}
               </div>
@@ -40,7 +46,15 @@ export default function BuilderInput({}: Props) {
         </div>
         <div id="suggestions" className="flex flex-col gap-5">
           <h2 className="text-md font-light">Suggestions:</h2>
-          <div id="ingredients-container"></div>
+          <div id="ingredients-container" className="flex flex-wrap gap-2">
+            {filteredSuggestions.map((i) => (
+              <IngredientItem
+                onClick={() => addIngredient(i)}
+                name={i}
+                key={i}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

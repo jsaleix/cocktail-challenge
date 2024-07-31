@@ -5,5 +5,5 @@ export interface SearchIngredientResponse {
 }
 
 export interface ListIngredientsResponse {
-  strIngredient1: string;
+  drinks: Array<Record<"strIngredient1", string>>;
 }

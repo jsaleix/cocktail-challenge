@@ -12,7 +12,7 @@ export default function IngredientItem({
   return (
     <span
       onClick={onClick}
-      className="flex w-fit rounded-xl border-2 border-white px-2 py-1 cursor-pointer hover:opacity-80 duration-200"
+      className="flex items-center gap-3 w-fit rounded-2xl border-2 border-white px-5 py-1 cursor-pointer hover:opacity-80 duration-200"
     >
       <p className="select-none	">{name}</p>
       {showCross && (

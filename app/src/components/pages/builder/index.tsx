@@ -9,10 +9,10 @@ import { debounce } from "@/lib/utils";
 import { IngredientInList } from "@/lib/types/cocktail";
 
 interface Props {
-  ingredients: IngredientInList[];
+  suggestions: string[];
 }
 
-export default function BuilderPage() {
+export default function BuilderPage({suggestions}: Props) {
   const { selectedIngredients, refreshRecipes } = useBuilderContext();
 
   useEffect(() => {
@@ -23,8 +23,8 @@ export default function BuilderPage() {
 
   return (
     <div className="w-full h-full flex flex-col md:flex-row items-center justify-center gap-10">
-      <BuilderInput />
-      <div className="h-full flex flex-col items-center justify-center">
+      <BuilderInput suggestions={suggestions} />
+      <div className="h-full flex flex-col items-center justify-center rotate-90 md:rotate-0 ">
         <CircledArrow />
       </div>
       <BuilderOutput />

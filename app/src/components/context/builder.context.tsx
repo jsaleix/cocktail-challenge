@@ -31,7 +31,7 @@ export const BuilderProvider = ({ children }: Props) => {
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
 
   const addIngredient = (i: string) => {
-    if (selectedIngredients.includes(i)) return;
+    if (selectedIngredients.includes(i.toLowerCase())) return;
     setSelectedIngredients((prev) => [...prev, i.toLowerCase()]);
   };
 
