@@ -6,6 +6,8 @@
   --bg-color: #121d37;
   --bg-color-start: #121d37;
   --bg-color-end: #0f0271;
+  --dark-blue: #121d37;
+  --light-blue: #3a4a77;
 }
 
 /* @media (prefers-color-scheme: dark) {

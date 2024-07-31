@@ -27,7 +27,7 @@ export default function Header() {
                         <ul className="flex gap-6 px-5 border-r-2 border-gray">
                             <li>
                                 <ActiveLink
-                                    href="/"
+                                    href="/builder"
                                     className="hover:opacity-80"
                                     activeClassName="underline"
                                 >
