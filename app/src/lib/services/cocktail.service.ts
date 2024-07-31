@@ -126,7 +126,7 @@ class CocktailService {
       } else {
         console.error(e);
       }
-      return [];
+      return null;
     }
   }
 }
