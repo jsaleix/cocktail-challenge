@@ -1,6 +1,9 @@
 import { COCKTAIL_API_ENDPOINT } from "../config/endpoints";
 import { IngredientInList } from "../types/cocktail";
-import { SearchIngredientResponse } from "../types/requests";
+import {
+  ListIngredientsResponse,
+  SearchIngredientResponse,
+} from "../types/requests";
 
 class CocktailService {
   async getRandom() {
@@ -39,6 +42,29 @@ class CocktailService {
         throw new Error("Failed to fetch data");
       }
       return (await req.json()) as SearchIngredientResponse;
+    } catch (e) {
+      if (e instanceof Error) {
+        console.error(e.message);
+      } else {
+        console.error(e);
+      }
+      return null;
+    }
+  }
+
+  async listIngredients(): Promise<ListIngredientsResponse | null> {
+    try {
+      const endpoint = new URL(`${COCKTAIL_API_ENDPOINT}//list.php?i=list`);
+      const req = await fetch(endpoint, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!req.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      return (await req.json()) as ListIngredientsResponse;
     } catch (e) {
       if (e instanceof Error) {
         console.error(e.message);
