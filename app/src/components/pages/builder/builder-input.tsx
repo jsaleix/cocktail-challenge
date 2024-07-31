@@ -27,12 +27,11 @@ export default function BuilderInput({}: Props) {
             )}
             {selectedIngredients.length > 0 && (
               <div className="flex flex-wrap gap-2">
-                {selectedIngredients.map((i, k) => (
+                {selectedIngredients.map((i) => (
                   <IngredientItem
                     onClick={() => removeIngredient(i)}
-                    name={i.strIngredient}
-                    id={i.idIngredient}
-                    key={i.idIngredient}
+                    name={i}
+                    key={i}
                   />
                 ))}
               </div>
@@ -56,7 +55,7 @@ function SearchIngredientPart({}: SearchIngredientPartProps) {
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { addIngredient, searchIngredient } = useBuilderContext();
 
-  const wrapAddIngredient = (i: IngredientInList) => {
+  const wrapAddIngredient = (i: string) => {
     addIngredient(i);
     setInputValue("");
   };
@@ -85,9 +84,8 @@ function SearchIngredientPart({}: SearchIngredientPartProps) {
         {results.length > 0 &&
           results.map((i, k) => (
             <IngredientItem
-              onClick={() => wrapAddIngredient(i)}
+              onClick={() => wrapAddIngredient(i.strIngredient)}
               name={i.strIngredient}
-              id={i.idIngredient}
               key={i.idIngredient}
             />
           ))}

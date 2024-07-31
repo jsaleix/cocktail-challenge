@@ -5,9 +5,9 @@ import { createContext, useContext, useState } from "react";
 
 interface BuilderContextType {
   searchIngredient: (query: string) => Promise<IngredientInList[] | null>;
-  addIngredient: (i: IngredientInList) => void;
-  removeIngredient: (i: IngredientInList) => void;
-  selectedIngredients: IngredientInList[];
+  addIngredient: (i: string) => void;
+  removeIngredient: (i: string) => void;
+  selectedIngredients: string[];
   refreshRecipes: () => void;
   recipes: any[];
 }
@@ -28,26 +28,22 @@ interface Props {
 
 export const BuilderProvider = ({ children }: Props) => {
   const [recipes, setRecipes] = useState<any[]>([]);
-  const [selectedIngredients, setSelectedIngredients] = useState<
-    IngredientInList[]
-  >([]);
+  const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
 
-  const addIngredient = (i: IngredientInList) => {
-    if (selectedIngredients.find((x) => x.idIngredient === i.idIngredient))
-      return;
-    setSelectedIngredients((prev) => [...prev, i]);
+  const addIngredient = (i: string) => {
+    if (selectedIngredients.includes(i)) return;
+    setSelectedIngredients((prev) => [...prev, i.toLowerCase()]);
   };
 
-  const removeIngredient = (i: IngredientInList) => {
-    setSelectedIngredients((prev) =>
-      prev.filter((x) => x.idIngredient !== i.idIngredient)
-    );
+  const removeIngredient = (i: string) => {
+    setSelectedIngredients((prev) => prev.filter((ing) =>
+      ing !== i.toLowerCase()
+    ));
   };
 
   const refreshRecipes = async () => {
-    const ingredients = selectedIngredients.map((i) => i.strIngredient);
-    if (ingredients.length === 0) return;
-    const res = await fetchRecipes(ingredients);
+    if (selectedIngredients.length === 0) return;
+    const res = await fetchRecipes(selectedIngredients);
     if (res) setRecipes(res);
   };
 
