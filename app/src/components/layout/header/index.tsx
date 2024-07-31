@@ -2,13 +2,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import ActiveLink from "../common/active-link";
+import ActiveLink from "../../common/active-link";
 import { GITHUB_URL } from "@/lib/config/links";
 
 export default function Header() {
     return (
-        <header className="hidden md:flex w-full h-fit">
-            <div className="w-full p-3 container mx-auto flex justify-between flex items-center border-b-2 border-white">
+        <header className="z-10 bg-transparent flex w-full h-fit">
+            <div className="w-full p-3 container mx-auto flex justify-between flex items-center border-b-2 border-gray-500">
                 <div className={"flex justify-center items-center gap-6"}>
                     <div className="w-33 h-20 overflow-hidden hover:opacity-80">
                         <Link href="/">

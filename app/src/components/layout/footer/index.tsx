@@ -1,5 +1,5 @@
 export default function Footer() {
-    return (
-        <footer className="border-t-2 border-gray-500 footer footer-center p-10 bg-background text-base-content rounded"></footer>
-    );
+  return (
+    <footer className="mt-auto w-full h-44 border-t-2 border-gray-500 p-10 bg-backgrounbd"></footer>
+  );
 }

@@ -1,0 +1,45 @@
+export default function BGVisuals() {
+  return (
+    <div className="absolute w-full h-full overflow-hidden">
+      <div
+        className="fixed top-40 "
+        style={{
+          left: "-30rem",
+          height: "90rem",
+          width: "90rem",
+          opacity: 0.7,
+          backgroundImage: "url('/orange-ellipsis.png')",
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          zIndex: 1,
+        }}
+      />
+      <div
+        className="fixed top-20"
+        style={{
+          right: "-40rem",
+          height: "80rem",
+          width: "80rem",
+          opacity: 0.7,
+          backgroundImage: "url('/blue-ellipsis.png')",
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat",
+          zIndex: 1,
+        }}
+      />
+      <div
+        id="bg-image"
+        className={"absolute top-0 left-0 w-full h-full pointer-events-none"}
+        style={{
+          opacity: 0.3,
+          backgroundImage: "url('/background.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          zIndex: -1,
+          filter: "blur(10px)",
+        }}
+      />
+    </div>
+  );
+}
