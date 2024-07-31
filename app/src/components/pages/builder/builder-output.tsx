@@ -1,4 +1,5 @@
 import { useBuilderContext } from "@/components/context/builder.context";
+import RecipeItem from "@/components/recipe";
 
 interface Props {}
 
@@ -16,6 +17,13 @@ export default function builderOutput({}: Props) {
             <div className="italic text-sm text-gray-300">
               <p>No recipes found.</p>
               <p>Try adding or removing ingredients.</p>
+            </div>
+          )}
+          {recipes.length > 0 && (
+            <div className="overflow-hidden rounded-md">
+              {recipes.slice(0, 5).map((r) => (
+                <RecipeItem cocktail={r} />
+              ))}
             </div>
           )}
         </div>
