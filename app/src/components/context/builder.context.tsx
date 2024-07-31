@@ -36,13 +36,16 @@ export const BuilderProvider = ({ children }: Props) => {
   };
 
   const removeIngredient = (i: string) => {
-    setSelectedIngredients((prev) => prev.filter((ing) =>
-      ing !== i.toLowerCase()
-    ));
+    setSelectedIngredients((prev) =>
+      prev.filter((ing) => ing !== i.toLowerCase())
+    );
   };
 
   const refreshRecipes = async () => {
-    if (selectedIngredients.length === 0) return;
+    if (selectedIngredients.length === 0) {
+      setRecipes([]);
+      return;
+    }
     const res = await fetchRecipes(selectedIngredients);
     if (res) setRecipes(res);
   };
