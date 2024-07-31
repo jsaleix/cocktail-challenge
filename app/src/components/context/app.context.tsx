@@ -27,21 +27,20 @@ interface Props {
 export const AppContextProvider = ({ children }: Props) => {
   const [savedDrinks, setSavedDrinks] = useState<SavedCocktailI[]>([]);
 
-  useEffect(() => {
-    setSavedDrinks(getItems());
-  }, []);
-
   const saveItem = (item: SaveCocktailI) => {
+    if (savedDrinks.findIndex((drink) => drink.id === item.id) !== -1) return;
     const newItems = [
       ...savedDrinks,
       { ...item, createdAt: new Date().toISOString() },
     ];
     setSavedDrinks(newItems);
+    saveItems(newItems);
   };
 
   const removeItem = (id: string) => {
     const newItems = savedDrinks.filter((item) => item.id !== id);
     setSavedDrinks(newItems);
+    saveItems(newItems);
   };
 
   const isLiked = (id: string) => {
@@ -49,8 +48,8 @@ export const AppContextProvider = ({ children }: Props) => {
   };
 
   useEffect(() => {
-    saveItems(savedDrinks);
-  }, [savedDrinks]);
+    setSavedDrinks(getItems());
+  }, []);
 
   return (
     <AppContext.Provider

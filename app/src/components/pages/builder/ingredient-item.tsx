@@ -4,21 +4,21 @@ interface Props {
   name: string;
   onClick: () => void;
   showCross?: boolean;
-  bgColor?: string;
+  bgColor?: "black" | "green";
 }
 
 export default function IngredientItem({
   name,
   onClick,
   showCross = false,
-  bgColor,
+  bgColor = "black"
 }: Props) {
   return (
     <span
       onClick={onClick}
       className={clsx(
         "flex items-center gap-3 w-fit rounded-md px-5 py-1 cursor-pointer hover:opacity-80 duration-200",
-        bgColor ? `bg-${bgColor}` : "bg-black"
+        bgColor === "black" ? "bg-black" : "bg-green"
       )}
     >
       <p className="select-none	">{name}</p>

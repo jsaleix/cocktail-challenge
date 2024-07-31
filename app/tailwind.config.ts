@@ -12,7 +12,8 @@ const config: Config = {
         background: "var(--bg-color)",
         "dark-blue": "var(--dark-blue)",
         "light-blue": "var(--light-blue)",
-        "green-btn": "#489B2B"
+        "slightly-darker-blue": "var(--slightly-darker-blue)",
+        "green": "#489B2B"
       },
     },
   },

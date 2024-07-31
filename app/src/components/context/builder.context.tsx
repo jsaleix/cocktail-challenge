@@ -1,6 +1,7 @@
 "use client";
 import { fetchRecipes, searchIngredientAction } from "@/actions/builder";
 import { IngredientInList } from "@/lib/types/cocktail";
+import { useQuery } from "@tanstack/react-query";
 import { createContext, useContext, useState } from "react";
 
 interface BuilderContextType {
@@ -10,6 +11,8 @@ interface BuilderContextType {
   selectedIngredients: string[];
   refreshRecipes: () => void;
   recipes: any[];
+  recipesLoading: boolean;
+  recipesError: any;
 }
 
 const BuilderContext = createContext<BuilderContextType | null>(null);
@@ -27,8 +30,18 @@ interface Props {
 }
 
 export const BuilderProvider = ({ children }: Props) => {
-  const [recipes, setRecipes] = useState<any[]>([]);
   const [selectedIngredients, setSelectedIngredients] = useState<string[]>([]);
+  const {
+    refetch: refreshRecipes,
+    data: rawRecipes,
+    isPending: recipesLoading,
+    error: recipesError,
+  } = useQuery({
+    queryKey: ["recipes"],
+    queryFn: async () => await fetchRecipes(selectedIngredients),
+  });
+
+  const recipes = rawRecipes ? rawRecipes.slice(0, 5) : [];
 
   const addIngredient = (i: string) => {
     if (selectedIngredients.includes(i.toLowerCase())) return;
@@ -41,26 +54,19 @@ export const BuilderProvider = ({ children }: Props) => {
     );
   };
 
-  const refreshRecipes = async () => {
-    if (selectedIngredients.length === 0) {
-      setRecipes([]);
-      return;
-    }
-    const res = await fetchRecipes(selectedIngredients);
-    if (res) setRecipes(res);
-  };
-
   const searchIngredient = searchIngredientAction;
 
   return (
     <BuilderContext.Provider
       value={{
-        recipes,
         selectedIngredients,
         addIngredient,
         removeIngredient,
+        recipes,
         refreshRecipes,
         searchIngredient,
+        recipesLoading,
+        recipesError,
       }}
     >
       {children}

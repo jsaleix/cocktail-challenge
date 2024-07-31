@@ -13,11 +13,13 @@ export default function BuilderInput({ suggestions }: Props) {
   const { selectedIngredients, removeIngredient, addIngredient } =
     useBuilderContext();
   const filteredSuggestions = useMemo(() => {
-    return suggestions.filter((s) => !selectedIngredients.includes(s.toLowerCase()));
+    return suggestions.filter(
+      (s) => !selectedIngredients.includes(s.toLowerCase())
+    );
   }, [suggestions, selectedIngredients]);
 
   return (
-    <section className="min-h-4/5 w-full md:w-1/3 bg-light-blue rounded rounded-md shadow-2xl">
+    <section className="min-h-4/5 w-full md:w-1/3 rounded rounded-md shadow-2xl bg-gradient-to-r from-light-blue to-slightly-darker-blue ">
       <div className="w-full h-full flex flex-col gap-5 p-5">
         <div
           className="flex flex-col gap-3 border-b-2 border-b-gray-500 pb-5"
@@ -38,7 +40,7 @@ export default function BuilderInput({ suggestions }: Props) {
                     name={i}
                     key={i}
                     showCross
-                    bgColor="green-btn"
+                    bgColor="green"
                   />
                 ))}
               </div>

@@ -1,25 +1,28 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import ReactQueryProvider from "@/components/context/react-query";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-    title: "Zama challenge",
-    description: "Cocktail Builder",
+  title: "Zama challenge",
+  description: "Cocktail Builder",
 };
 
 export default function RootLayout({
-    children,
+  children,
 }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-    return (
-        <html lang="en">
-            <body className={inter.className}>
-                {children}
-                <div id="modal-root"></div>
-            </body>
-        </html>
-    );
+  return (
+    <html lang="en">
+      <body className={inter.className}>
+        <ReactQueryProvider>
+          {children}
+          <div id="modal-root"></div>
+        </ReactQueryProvider>
+      </body>
+    </html>
+  );
 }
