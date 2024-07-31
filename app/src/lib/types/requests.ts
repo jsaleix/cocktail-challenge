@@ -7,3 +7,11 @@ export interface SearchIngredientResponse {
 export interface ListIngredientsResponse {
   drinks: Array<Record<"strIngredient1", string>>;
 }
+
+export interface ListDrinksByIngredientResponse {
+  drinks: {
+    strDrink: string;
+    strDrinkThumb: string;
+    idDrink: string;
+  }[];
+}

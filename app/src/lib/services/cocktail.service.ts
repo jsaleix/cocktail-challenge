@@ -1,9 +1,11 @@
+"server-only";
 import { COCKTAIL_API_ENDPOINT } from "../config/endpoints";
-import { IngredientInList } from "../types/cocktail";
 import {
+  ListDrinksByIngredientResponse,
   ListIngredientsResponse,
   SearchIngredientResponse,
 } from "../types/requests";
+import { authHeaders } from "./auth.headers";
 
 class CocktailService {
   async getRandom() {
@@ -59,6 +61,7 @@ class CocktailService {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          ...authHeaders(),
         },
       });
       if (!req.ok) {
@@ -72,6 +75,58 @@ class CocktailService {
         console.error(e);
       }
       return null;
+    }
+  }
+
+  async listRecipesByIngredient(ingredient: string) {
+    try {
+      const endpoint = new URL(
+        `${COCKTAIL_API_ENDPOINT}//filter.php?i=${ingredient}`
+      );
+      const req = await fetch(endpoint, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          ...authHeaders(),
+        },
+      });
+      if (!req.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      return (await req.json()) as ListDrinksByIngredientResponse;
+    } catch (e) {
+      if (e instanceof Error) {
+        console.error(e.message);
+      } else {
+        console.error(e);
+      }
+      return [];
+    }
+  }
+
+  async listRecipesByIngredients(ingredients: string[]) {
+    try {
+      const endpoint = new URL(
+        `${COCKTAIL_API_ENDPOINT}//filter.php?i=${ingredients.join(",")}`
+      );
+      const req = await fetch(endpoint, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          ...authHeaders(),
+        },
+      });
+      if (!req.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      return (await req.json()) as ListDrinksByIngredientResponse;
+    } catch (e) {
+      if (e instanceof Error) {
+        console.error(e.message);
+      } else {
+        console.error(e);
+      }
+      return [];
     }
   }
 }
