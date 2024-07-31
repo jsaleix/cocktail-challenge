@@ -3,7 +3,7 @@ import SearchInput from "@/components/common/search-input";
 import { IngredientInList } from "@/lib/types/cocktail";
 import { useEffect, useMemo, useRef, useState } from "react";
 import IngredientItem from "./ingredient-item";
-import { useBuilderContext } from "@/components/context/builder.context";
+import { useBuilderContext } from "@/contexts/builder.context";
 
 interface Props {
   suggestions: string[];

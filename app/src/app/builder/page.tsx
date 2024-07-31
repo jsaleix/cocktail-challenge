@@ -1,4 +1,4 @@
-import { BuilderProvider } from "@/components/context/builder.context";
+import { BuilderProvider } from "@/contexts/builder.context";
 import BuilderPage from "@/components/pages/builder";
 import cocktailService from "@/lib/services/cocktail.service";
 

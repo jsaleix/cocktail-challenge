@@ -26,7 +26,7 @@ export default function ActiveLink({
             return currentPath === rest.href;
         }
         return currentPath.startsWith(rest.href as string);
-    }, [currentPath, rest.href]);
+    }, [currentPath, rest.href, exact]);
 
     return (
         <Link

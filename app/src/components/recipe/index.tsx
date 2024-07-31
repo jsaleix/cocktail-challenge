@@ -1,7 +1,7 @@
 import { CocktailInListI } from "@/lib/types/cocktail";
 import SavedIcon from "../icons/saved-icon";
 import SaveIcon from "../icons/save-icon";
-import { useAppContext } from "../context/app.context";
+import { useAppContext } from "../../contexts/app.context";
 
 interface Props {
   cocktail: CocktailInListI;

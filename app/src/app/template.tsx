@@ -1,4 +1,4 @@
-import { AppContextProvider } from "@/components/context/app.context";
+import { AppContextProvider } from "@/contexts/app.context";
 import BGVisuals from "@/components/layout/bg-visuals";
 import Footer from "@/components/layout/footer";
 import Header from "@/components/layout/header";

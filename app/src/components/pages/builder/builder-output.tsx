@@ -1,9 +1,11 @@
-import { useBuilderContext } from "@/components/context/builder.context";
+"use client";
+
+import { useBuilderContext } from "@/contexts/builder.context";
 import RecipeItem from "@/components/recipe";
 
 interface Props {}
 
-export default function builderOutput({}: Props) {
+export default function BuilderOutput({}: Props) {
   const { recipes, recipesLoading } = useBuilderContext();
 
   return (
