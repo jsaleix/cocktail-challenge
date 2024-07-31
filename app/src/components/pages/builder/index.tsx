@@ -1,27 +1,26 @@
 "use client";
 
-import { searchIngredientAction, fetchRecipes } from "@/actions/builder";
 import CircledArrow from "@/components/icons/circled-arrow";
 import BuilderInput from "./builder-input";
 import BuilderOutput from "./builder-output";
-import { useState } from "react";
+import { useEffect } from "react";
+import { useBuilderContext } from "@/components/context/builder.context";
+import { debounce } from "@/lib/utils";
 
 export default function BuilderPage() {
-  const [recipes, setRecipes] = useState<any[]>([]);
+  const { selectedIngredients, refreshRecipes } = useBuilderContext();
 
-  const handleRefresh = async (ingredients: string[]) => {
-    const res = await fetchRecipes(ingredients);
-    if (res) setRecipes(res);
-  };
-  
+  useEffect(() => {
+    debounce(() => {
+      refreshRecipes();
+    }, 500)();
+  }, [selectedIngredients]);
+
   return (
     <div className="w-full h-full flex flex-col md:flex-row items-center justify-center gap-10">
-      <BuilderInput
-        searchIngredient={searchIngredientAction}
-        refreshRecipes={handleRefresh}
-      />
+      <BuilderInput />
       <CircledArrow />
-      <BuilderOutput recipes={recipes} />
+      <BuilderOutput />
     </div>
   );
 }

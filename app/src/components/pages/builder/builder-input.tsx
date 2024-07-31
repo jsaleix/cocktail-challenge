@@ -4,38 +4,12 @@ import { IngredientInList } from "@/lib/types/cocktail";
 import { useEffect, useRef, useState } from "react";
 import IngredientItem from "./ingredient-item";
 import { debounce } from "@/lib/utils";
+import { useBuilderContext } from "@/components/context/builder.context";
 
-interface Props {
-  searchIngredient: (query: string) => Promise<IngredientInList[] | null>;
-  refreshRecipes: (ingredients: string[]) => void;
-}
+interface Props {}
 
-export default function BuilderInput({
-  searchIngredient,
-  refreshRecipes,
-}: Props) {
-  const [selectedIngredients, setSelectedIngredients] = useState<
-    IngredientInList[]
-  >([]);
-
-  const addIngredient = (i: IngredientInList) => {
-    if (selectedIngredients.find((x) => x.idIngredient === i.idIngredient))
-      return;
-    setSelectedIngredients((prev) => [...prev, i]);
-  };
-
-  const removeIngredient = (i: IngredientInList) => {
-    setSelectedIngredients((prev) =>
-      prev.filter((x) => x.idIngredient !== i.idIngredient)
-    );
-  };
-
-  useEffect(() => {
-    const ingredients = selectedIngredients.map((i) => i.strIngredient);
-    debounce(() => {
-      refreshRecipes(ingredients);
-    }, 500)();
-  }, [selectedIngredients]);
+export default function BuilderInput({}: Props) {
+  const { selectedIngredients, removeIngredient } = useBuilderContext();
 
   return (
     <section className="min-h-4/5 w-full md:w-1/3 bg-light-blue rounded rounded-md shadow-2xl">
@@ -44,10 +18,7 @@ export default function BuilderInput({
           className="flex flex-col gap-3 border-b-2 border-b-gray-500 pb-5"
           id="search"
         >
-          <SearchIngredientPart
-            search={searchIngredient}
-            addIngredient={addIngredient}
-          />
+          <SearchIngredientPart />
           <div id="selected-ingredients">
             {selectedIngredients.length == 0 && (
               <p className="italic text-sm text-gray-300">
@@ -77,19 +48,13 @@ export default function BuilderInput({
   );
 }
 
-interface SearchIngredientPartProps {
-  addIngredient: (i: IngredientInList) => void;
-  search: (query: string) => Promise<IngredientInList[] | null>;
-}
+interface SearchIngredientPartProps {}
 
-function SearchIngredientPart({
-  search,
-  addIngredient,
-}: SearchIngredientPartProps) {
+function SearchIngredientPart({}: SearchIngredientPartProps) {
   const [results, setResults] = useState<IngredientInList[]>([]);
-  const inputRef = useRef<HTMLInputElement>(null);
   const [inputValue, setInputValue] = useState("");
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { addIngredient, searchIngredient } = useBuilderContext();
 
   const wrapAddIngredient = (i: IngredientInList) => {
     addIngredient(i);
@@ -103,7 +68,7 @@ function SearchIngredientPart({
     }
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(async () => {
-      const res = await search(inputValue);
+      const res = await searchIngredient(inputValue);
       if (res) setResults(res);
     }, 500);
   }, [inputValue]);
@@ -112,7 +77,6 @@ function SearchIngredientPart({
     <div className="flex flex-col gap-3">
       <SearchInput
         value={inputValue}
-        ref={inputRef}
         onChange={(e) => setInputValue(e.target.value)}
         placeholder="Search an ingredient"
         autoFocus
