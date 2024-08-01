@@ -39,6 +39,7 @@ export const BuilderProvider = ({ children }: Props) => {
   } = useQuery({
     queryKey: ["recipes"],
     queryFn: async () => await fetchRecipes(selectedIngredients),
+    refetchOnWindowFocus: false,
   });
 
   const recipes = rawRecipes ? rawRecipes.slice(0, 5) : [];

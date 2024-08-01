@@ -1,6 +1,11 @@
-export default function SavedIcon() {
+interface Props {
+  onClick?: () => void;
+}
+
+export default function SavedIcon({onClick}: Props) {
   return (
     <svg
+      onClick={onClick}
       width="32"
       height="32"
       viewBox="0 0 32 32"
