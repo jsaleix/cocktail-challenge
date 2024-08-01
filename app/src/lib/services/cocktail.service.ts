@@ -3,6 +3,7 @@ import { COCKTAIL_API_ENDPOINT } from "../config/endpoints";
 import {
   ListDrinksByIngredientResponse,
   ListIngredientsResponse,
+  SearchCocktailResponse,
   SearchIngredientResponse,
 } from "../types/requests";
 import { authHeaders } from "./auth.headers";
@@ -120,6 +121,30 @@ class CocktailService {
         throw new Error("Failed to fetch data");
       }
       return (await req.json()) as ListDrinksByIngredientResponse;
+    } catch (e) {
+      if (e instanceof Error) {
+        console.error(e.message);
+      } else {
+        console.error(e);
+      }
+      return null;
+    }
+  }
+
+  async searchCocktail(c: string) {
+    try {
+      const endpoint = new URL(`${COCKTAIL_API_ENDPOINT}/search.php?s=${c}`);
+      const req = await fetch(endpoint, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          ...authHeaders(),
+        },
+      });
+      if (!req.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      return (await req.json()) as SearchCocktailResponse;
     } catch (e) {
       if (e instanceof Error) {
         console.error(e.message);

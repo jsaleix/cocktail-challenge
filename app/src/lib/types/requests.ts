@@ -1,4 +1,4 @@
-import { IngredientInList } from "./cocktail";
+import { CocktailFullI, IngredientFullI, IngredientInList } from "./cocktail";
 
 export interface SearchIngredientResponse {
   ingredients: IngredientInList[];
@@ -14,4 +14,8 @@ export interface ListDrinksByIngredientResponse {
     strDrinkThumb: string;
     idDrink: string;
   }[];
+}
+
+export interface SearchCocktailResponse {
+  drinks: CocktailFullI[];
 }

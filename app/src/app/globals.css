@@ -23,3 +23,12 @@ body {
 main {
   height: 100%;
 }
+
+.hideScrollBar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hideScrollBar::-webkit-scrollbar {
+  display: none;
+}
