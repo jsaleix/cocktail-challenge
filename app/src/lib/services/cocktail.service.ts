@@ -44,7 +44,10 @@ class CocktailService {
       if (!req.ok) {
         throw new Error("Failed to fetch data");
       }
-      return (await req.json()) as SearchIngredientResponse;
+      const data = await req.json();
+      if (!data?.ingredients || !Array.isArray(data.ingredients))
+        throw new Error("Invalid data");
+      return data as SearchIngredientResponse;
     } catch (e) {
       if (e instanceof Error) {
         console.error(e.message);
@@ -120,7 +123,10 @@ class CocktailService {
       if (!req.ok) {
         throw new Error("Failed to fetch data");
       }
-      return (await req.json()) as ListDrinksByIngredientResponse;
+      const data = await req.json();
+      if (!data?.drinks || !Array.isArray(data.drinks))
+        throw new Error("Invalid data");
+      return data as ListDrinksByIngredientResponse;
     } catch (e) {
       if (e instanceof Error) {
         console.error(e.message);

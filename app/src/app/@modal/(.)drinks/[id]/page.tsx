@@ -6,17 +6,5 @@ export default function DrinkModal({
 }: {
   params: { id: string };
 }) {
-  return (
-    <div
-      style={{
-        position: "absolute",
-        zIndex: 10000,
-        height: "100vh",
-        width: "100vw",
-        background: "black",
-      }}
-    >
-      AYO
-    </div>
-  );
+  return <Modal>{photoId}</Modal>;
 }
