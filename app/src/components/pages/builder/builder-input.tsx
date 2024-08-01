@@ -4,6 +4,7 @@ import { IngredientInList } from "@/lib/types/cocktail";
 import { useEffect, useMemo, useRef, useState } from "react";
 import IngredientItem from "./ingredient-item";
 import { useBuilderContext } from "@/contexts/builder.context";
+import Divider from "@/components/common/divider";
 
 interface Props {
   suggestions: string[];
@@ -22,7 +23,7 @@ export default function BuilderInput({ suggestions }: Props) {
     <section className="min-h-4/5 w-full md:w-1/3 rounded rounded-md shadow-2xl bg-gradient-to-r from-light-blue to-slightly-darker-blue ">
       <div className="w-full h-full flex flex-col gap-5 p-5">
         <div
-          className="flex flex-col gap-3 border-b-2 border-b-gray-500 pb-5"
+          className="flex flex-col gap-3"
           id="search"
         >
           <SearchIngredientPart />
@@ -47,6 +48,7 @@ export default function BuilderInput({ suggestions }: Props) {
             )}
           </div>
         </div>
+        <Divider />
         <div id="suggestions" className="flex flex-col gap-5">
           <h2 className="text-md font-light">Suggestions:</h2>
           <div id="ingredients-container" className="flex flex-wrap gap-2">

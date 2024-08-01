@@ -38,7 +38,10 @@ export const BuilderProvider = ({ children }: Props) => {
     error: recipesError,
   } = useQuery({
     queryKey: ["recipes"],
-    queryFn: async () => await fetchRecipes(selectedIngredients),
+    queryFn: async () => {
+      if (selectedIngredients.length === 0) return [];
+      return await fetchRecipes(selectedIngredients);
+    },
     refetchOnWindowFocus: false,
   });
 
