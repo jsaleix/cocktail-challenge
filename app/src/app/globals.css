@@ -20,6 +20,10 @@ body {
     var(--bg-color-end);
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
 main {
   height: 100%;
 }

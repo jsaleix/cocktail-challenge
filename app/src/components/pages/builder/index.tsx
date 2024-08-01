@@ -21,9 +21,9 @@ export default function BuilderPage({ suggestions }: Props) {
   }, [selectedIngredients, refreshRecipes]);
 
   return (
-    <div className="w-full h-full flex flex-col md:flex-row items-center justify-center gap-10">
+    <div className="w-full h-full flex flex-col lg:flex-row items-center justify-center gap-10">
       <BuilderInput suggestions={suggestions} />
-      <div className="h-full flex flex-col items-center justify-center rotate-90 md:rotate-0 ">
+      <div className="h-full flex flex-col items-center justify-center rotate-90 lg:rotate-0 ">
         <CircledArrow />
       </div>
       <BuilderOutput />

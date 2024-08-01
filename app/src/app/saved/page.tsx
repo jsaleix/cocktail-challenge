@@ -1,10 +1,19 @@
-export default function Browse() {
+import SavedPage from "@/components/pages/saved";
+import cocktailService from "@/lib/services/cocktail.service";
+
+const fetchData = async () => {
+  const data = await cocktailService.searchCocktail("");
+  if (data) return data.drinks;
+  return [];
+};
+
+export default async function Browse() {
+  const data = await fetchData();
+
   return (
     <div className="container mx-auto h-full w-full">
-      <div className={"h-full w-full p-5"}>
-        <div className="w-full flex items-center justify-center gap-10">
-          <div className="min-h-48 w-2/3 bg-light-blue shadow-2xl "></div>
-        </div>
+      <div className="w-full h-full flex items-center justify-center gap-10 p-5">
+        <SavedPage data={data} />
       </div>
     </div>
   );

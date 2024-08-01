@@ -20,7 +20,7 @@ export default function BuilderInput({ suggestions }: Props) {
   }, [suggestions, selectedIngredients]);
 
   return (
-    <section className="min-h-4/5 w-full md:w-1/3 rounded rounded-md shadow-2xl bg-gradient-to-r from-light-blue to-slightly-darker-blue ">
+    <section className="min-h-4/5 w-full lg:w-1/3 rounded rounded-md shadow-2xl bg-gradient-to-r from-light-blue to-slightly-darker-blue ">
       <div className="w-full h-full flex flex-col gap-5 p-5">
         <div
           className="flex flex-col gap-3"

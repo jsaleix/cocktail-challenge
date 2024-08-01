@@ -28,7 +28,7 @@ export const AppContextProvider = ({ children }: Props) => {
   const [savedDrinks, setSavedDrinks] = useState<SavedCocktailI[]>([]);
 
   const saveItem = (item: SaveCocktailI) => {
-    if (savedDrinks.findIndex((drink) => drink.id === item.id) !== -1) return;
+    if (savedDrinks.findIndex((drink) => drink.idDrink === item.idDrink) !== -1) return;
     const newItems = [
       ...savedDrinks,
       { ...item, createdAt: new Date().toISOString() },
@@ -38,13 +38,13 @@ export const AppContextProvider = ({ children }: Props) => {
   };
 
   const removeItem = (id: string) => {
-    const newItems = savedDrinks.filter((item) => item.id !== id);
+    const newItems = savedDrinks.filter((item) => item.idDrink !== id);
     setSavedDrinks(newItems);
     saveItems(newItems);
   };
 
   const isLiked = (id: string) => {
-    return savedDrinks.findIndex((item) => item.id === id) !== -1;
+    return savedDrinks.findIndex((item) => item.idDrink === id) !== -1;
   };
 
   useEffect(() => {
