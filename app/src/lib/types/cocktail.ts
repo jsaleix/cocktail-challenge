@@ -8,7 +8,7 @@ export type CocktailFullI = BaseCockTailI & {
   ingredients: Array<InstructionI>;
 };
 
-export type InstructionI = Record<string, string>;
+export type InstructionI = { ingredient: string; measure: string };
 
 export type RawCocktailI = Record<string, string> & BaseCockTailI;
 
@@ -22,8 +22,11 @@ interface BaseCockTailI {
   strDrinkThumb: string;
 }
 
-export type IngredientInList = Pick<IngredientFullI, "idIngredient" | "strIngredient">;
-  
+export type IngredientInList = Pick<
+  IngredientFullI,
+  "idIngredient" | "strIngredient"
+>;
+
 export interface IngredientFullI {
   idIngredient: string;
   strIngredient: string;
