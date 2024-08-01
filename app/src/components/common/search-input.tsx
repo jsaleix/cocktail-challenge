@@ -1,8 +1,15 @@
+import clsx from "clsx";
+
 type Props = React.InputHTMLAttributes<HTMLInputElement>;
 
 const SearchInput = ({ className, placeholder, ...props }: Props) => {
   return (
-    <div className="flex items-center gap-3 bg-background rounded-xl px-5 shadow-md ">
+    <div
+      className={clsx(
+        "flex items-center gap-3 bg-background rounded-xl px-5 shadow-md ",
+        className
+      )}
+    >
       <svg
         width="30"
         height="30"
