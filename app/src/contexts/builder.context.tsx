@@ -34,7 +34,7 @@ export const BuilderProvider = ({ children }: Props) => {
   const {
     refetch: refreshRecipes,
     data: rawRecipes,
-    isPending: recipesLoading,
+    isFetching: recipesLoading,
     error: recipesError,
   } = useQuery({
     queryKey: ["recipes"],

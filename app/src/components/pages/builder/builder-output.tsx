@@ -2,6 +2,7 @@
 
 import { useBuilderContext } from "@/contexts/builder.context";
 import RecipeItem from "@/components/recipe";
+import Loader from "@/components/common/loader";
 
 interface Props {}
 
@@ -14,7 +15,7 @@ export default function BuilderOutput({}: Props) {
         <h2 className="text-xl font-semibold">
           Recipes ({recipes.length.toString()})
         </h2>
-        {recipesLoading && <p>Loading...</p>}
+        {recipesLoading && <Loader />}
         {!recipesLoading && (
           <div className="flex flex-col" id="recipes-container">
             {recipes.length == 0 && (
