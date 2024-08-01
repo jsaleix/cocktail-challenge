@@ -7,19 +7,17 @@ import RecipeItem from "@/components/recipe";
 import { useAppContext } from "@/contexts/app.context";
 import Header from "./header";
 
-interface Props {
-  data: CocktailFullI[];
-}
+interface Props {}
 
-export default function SavedPage({ data }: Props) {
+export default function SavedPage({}: Props) {
   const { savedDrinks } = useAppContext();
   const [recentFirst, setRecentFirst] = useState(false);
   const likedDrinks = useMemo(() => {
-    if (!recentFirst) {
-      return savedDrinks.reverse();
+    if (recentFirst) {
+      return [...savedDrinks].reverse();
     }
     return savedDrinks;
-  }, [savedDrinks, recentFirst, data]);
+  }, [savedDrinks, recentFirst]);
 
   return (
     <div className="flex flex-col gap-5 p-5 h-full w-full lg:w-2/3 bg-gradient-to-r from-light-blue to-slightly-darker-blue shadow-2xl rounded-md">
