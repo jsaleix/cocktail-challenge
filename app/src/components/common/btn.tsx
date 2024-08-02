@@ -1,8 +1,7 @@
 import clsx from "clsx";
 
-interface Props {
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  onClick?: () => void;
   className?: string;
   reverse?: boolean;
 }
@@ -12,7 +11,9 @@ export default function Btn({
   onClick,
   className,
   reverse = false,
+  ...rest
 }: Props) {
+  const disabled = "opacity-50 cursor-not-allowed hover:bg-transparent hover:text-white";
   const base =
     "group px-5 py-3 border-transparent border-2 rounded-xl flex items-center justify-center gap-2 text-md duration-500";
   const regular =
@@ -22,8 +23,14 @@ export default function Btn({
 
   return (
     <button
-      className={clsx(base, reverse ? reversed : regular, className)}
+      className={clsx(
+        base,
+        rest.disabled && disabled,
+        reverse ? reversed : regular,
+        className
+      )}
       onClick={onClick}
+      {...rest}
     >
       {children}
     </button>

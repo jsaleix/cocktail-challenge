@@ -17,7 +17,7 @@ export interface ListDrinksByIngredientResponse {
 }
 
 export interface SearchCocktailResponse {
-  drinks: CocktailFullI[];
+  drinks: CocktailFullI[] | null;
 }
 
 export interface ListCategoriesResponse {

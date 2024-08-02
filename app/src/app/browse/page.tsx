@@ -3,13 +3,13 @@ import { SearchContextProvider } from "@/contexts/search.context";
 import cocktailService from "@/lib/services/cocktail.service";
 
 const fetchInitialData = async () => {
-  const data = await cocktailService.searchCocktail("");
+  const data = await cocktailService.searchDrinkByName("");
   if (data) return data.drinks;
   return [];
 };
 
 export default async function Saved() {
-  const initialList = await fetchInitialData();
+  const initialList = await fetchInitialData() || [];
   const categories = await cocktailService.listCategories();
   const glassTypes = await cocktailService.listGlassTypes();
 

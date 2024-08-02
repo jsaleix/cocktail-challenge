@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useSearchContext } from "@/contexts/search.context";
 import FiltersPart from "./filters-part";
 import NamePart from "./name-part";
+import Divider from "@/components/common/divider";
 
 interface Props {}
 
@@ -13,17 +14,15 @@ export default function SearchForm({}: Props) {
   return (
     <>
       <div className="flex flex-col items-center gap-5">
-        <div
-          id="row_1"
-          className="w-full flex items-center flex-wrap md:flex-nowrap md:flex-row justify-between gap-5"
-        >
-          <NamePart />
-          <span className="select-none text-gray-500 w-full md:w-fit text-center ">
-            -
-          </span>
-          <FiltersPart />
+        <NamePart />
+        <div className="w-1/6">
+          <Divider />
         </div>
-        <div id="row_2" className="w-full flex items-center gap-5">
+        <FiltersPart />
+        <div
+          id="row_2"
+          className="w-full flex justify-center items-center gap-5"
+        >
           <div className="w-fit flex items-center gap-2" id="hide-saved">
             <input
               onChange={toggleHideSaved}

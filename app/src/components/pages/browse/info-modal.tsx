@@ -69,11 +69,17 @@ export function InfoModal({ isOpen, close }: Props) {
                     fill="#05FFF0"
                   />
                 </svg>
-
-                <p className={"w-1/2 text-gray-200"}>
-                  Due to the api limitations, you cannot search a cocktail by
-                  its name while using filters.
-                </p>
+                <div className="w-1/2 flex flex-col gap-2">
+                  <p className={"text-gray-200"}>
+                    Due to the api limitations, you cannot search a cocktail by
+                    its name while using filters.
+                  </p>
+                  <p className={"text-gray-200"}>
+                    <span className="font-bold">Update: </span>cross filtering
+                    is not functional either, so when you select a filter it
+                    disables the other filters.
+                  </p>
+                </div>
               </div>
             </div>
           </dialog>

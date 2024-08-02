@@ -1,4 +1,5 @@
 "server-only";
+import { FiltersI } from "@/contexts/search.context";
 import { COCKTAIL_API_ENDPOINT } from "../config/endpoints";
 import { RawCocktailI } from "../types/cocktail";
 import {
@@ -144,9 +145,44 @@ class CocktailService {
     }
   }
 
-  async searchCocktail(c: string) {
+  async searchDrinkByName(d: string) {
     try {
-      const endpoint = new URL(`${COCKTAIL_API_ENDPOINT}/search.php?s=${c}`);
+      const endpoint = new URL(`${COCKTAIL_API_ENDPOINT}/search.php?s=${d}`);
+      const req = await fetch(endpoint, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          ...authHeaders(),
+        },
+      });
+      if (!req.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      return (await req.json()) as SearchCocktailResponse;
+    } catch (e) {
+      if (e instanceof Error) {
+        console.error(e.message);
+      } else {
+        console.error(e);
+      }
+      return null;
+    }
+  }
+
+  async searchDrinkByFilters(f: Partial<FiltersI>) {
+    try {
+      const { alcoholic, category, glass } = f;
+      const filters = {
+        ...(alcoholic && { a: alcoholic.replace(" ", "_") }),
+        ...(category && { c: category.replace(" ", "_") }),
+        ...(glass && { g: glass.replace(" ", "_") }),
+      };
+      const filtersToString = new URLSearchParams(filters).toString();
+
+      const endpoint = new URL(
+        `${COCKTAIL_API_ENDPOINT}/filter.php?${filtersToString}`
+      );
+      console.log(endpoint.toString());
       const req = await fetch(endpoint, {
         method: "GET",
         headers: {
