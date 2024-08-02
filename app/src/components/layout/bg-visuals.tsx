@@ -8,7 +8,7 @@ export default function BGVisuals() {
           height: "90rem",
           width: "90rem",
           opacity: 0.7,
-          backgroundImage: "url('/orange-ellipsis.png')",
+          backgroundImage: "url('/orange-ellipsis.webp')",
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
           zIndex: 1,
@@ -21,7 +21,7 @@ export default function BGVisuals() {
           height: "80rem",
           width: "80rem",
           opacity: 0.7,
-          backgroundImage: "url('/blue-ellipsis.png')",
+          backgroundImage: "url('/blue-ellipsis.webp')",
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
           zIndex: 1,
@@ -32,7 +32,7 @@ export default function BGVisuals() {
         className={"fixed top-0 left-0 w-screen h-screen pointer-events-none"}
         style={{
           opacity: 0.3,
-          backgroundImage: "url('/background.jpg')",
+          backgroundImage: "url('/background.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",

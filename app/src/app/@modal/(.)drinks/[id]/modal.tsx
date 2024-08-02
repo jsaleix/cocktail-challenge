@@ -41,7 +41,7 @@ export function Modal({ drink }: Props) {
         >
           <button
             onClick={onDismiss}
-            className="absolute top-5 right-5 close-button ml-auto"
+            className="absolute top-5 right-5 close-button ml-auto hover:opacity-80"
           >
             <svg
               width="21"
