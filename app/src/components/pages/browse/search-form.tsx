@@ -1,15 +1,14 @@
-import SearchInput from "@/components/common/search-input";
-import Select from "@/components/common/select";
 import { InfoModal } from "./info-modal";
 import { useState } from "react";
+import { useSearchContext } from "@/contexts/search.context";
+import FiltersPart from "./filters-part";
+import NamePart from "./name-part";
 
-interface Props {
-  categories: string[];
-  glassTypes: string[];
-}
+interface Props {}
 
-export default function SearchForm({ categories, glassTypes }: Props) {
+export default function SearchForm({}: Props) {
   const [openInfoModal, setOpenInfoModal] = useState(false);
+  const { hideSaved, toggleHideSaved } = useSearchContext();
 
   return (
     <>
@@ -18,46 +17,17 @@ export default function SearchForm({ categories, glassTypes }: Props) {
           id="row_1"
           className="w-full flex items-center flex-wrap md:flex-nowrap md:flex-row justify-between gap-5"
         >
-          <form className="w-full md:w-1/3" name="search-by-name">
-            <SearchInput placeholder="Cocktail name" className="w-full" />
-          </form>
-          <span className="select-none text-gray-500 w-full md:w-fit text-center ">-</span>
-          <form
-            className="w-full md:w-2/3 flex items-center gap-3 flex-wrap md:flex-nowrap"
-            name="search-by-filters"
-          >
-            <Select className="w-full" name="alcoholic" value={"placeholder"}>
-              <option value="placeholder" disabled hidden>
-                Drink type
-              </option>{" "}
-              <option value="1">Alcoholic</option>
-              <option value="2">Non Alcoholic</option>
-            </Select>
-            <Select className="w-full" name="category" value={"placeholder"}>
-              <option value="placeholder" disabled hidden>
-                Category
-              </option>
-              {categories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </Select>
-            <Select className="w-full" name="glass" value={"placeholder"}>
-              <option value="placeholder" disabled hidden>
-                Glass type
-              </option>
-              {glassTypes.map((glass) => (
-                <option key={glass} value={glass}>
-                  {glass}
-                </option>
-              ))}
-            </Select>
-          </form>
+          <NamePart />
+          <span className="select-none text-gray-500 w-full md:w-fit text-center ">
+            -
+          </span>
+          <FiltersPart />
         </div>
         <div id="row_2" className="w-full flex items-center gap-5">
           <div className="w-fit flex items-center gap-2" id="hide-saved">
             <input
+              onChange={toggleHideSaved}
+              checked={hideSaved}
               type="checkbox"
               id="hide_saved"
               className="appearance-none checked:appearance-auto bg-background w-5 h-5 rounded-md cursor-pointer hover:bg-gray-800 duration-500"
