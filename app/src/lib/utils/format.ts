@@ -1,6 +1,10 @@
 import { CocktailFullI, InstructionI, RawCocktailI } from "../types/cocktail";
+import {
+  ListCategoriesResponse,
+  ListGlassTypesResponse,
+} from "../types/requests";
 
-export default function mapRawDrink(drink: RawCocktailI): CocktailFullI {
+export function mapRawDrink(drink: RawCocktailI): CocktailFullI {
   const {
     idDrink,
     strDrink,
@@ -35,4 +39,12 @@ export default function mapRawDrink(drink: RawCocktailI): CocktailFullI {
     strDrinkThumb,
     ingredients: mappedIngredients,
   };
+}
+
+export function mapRawCategoryResponse(data: ListCategoriesResponse) {
+  return data.drinks.map((drink) => drink.strCategory);
+}
+
+export function mapRawGlassTypesResponse(data: ListGlassTypesResponse) {
+  return data.drinks.map((drink) => drink.strGlass);
 }

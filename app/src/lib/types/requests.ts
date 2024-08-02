@@ -19,3 +19,11 @@ export interface ListDrinksByIngredientResponse {
 export interface SearchCocktailResponse {
   drinks: CocktailFullI[];
 }
+
+export interface ListCategoriesResponse {
+  drinks: Array<Record<"strCategory", string>>;
+}
+
+export interface ListGlassTypesResponse {
+  drinks: Array<Record<"strGlass", string>>;
+}

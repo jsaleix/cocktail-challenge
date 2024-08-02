@@ -2,11 +2,17 @@
 import { COCKTAIL_API_ENDPOINT } from "../config/endpoints";
 import { RawCocktailI } from "../types/cocktail";
 import {
+  ListCategoriesResponse,
   ListDrinksByIngredientResponse,
+  ListGlassTypesResponse,
   ListIngredientsResponse,
   SearchCocktailResponse,
   SearchIngredientResponse,
 } from "../types/requests";
+import {
+  mapRawCategoryResponse,
+  mapRawGlassTypesResponse,
+} from "../utils/format";
 import { authHeaders } from "./auth.headers";
 
 class CocktailService {
@@ -186,6 +192,60 @@ class CocktailService {
         console.error(e);
       }
       return null;
+    }
+  }
+
+  async listCategories() {
+    try {
+      const endpoint = new URL(`${COCKTAIL_API_ENDPOINT}/list.php?c=list`);
+      const req = await fetch(endpoint, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          ...authHeaders(),
+        },
+      });
+      if (!req.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      const data = await req.json();
+      if (!data?.drinks || !Array.isArray(data.drinks))
+        throw new Error("Invalid data");
+      return mapRawCategoryResponse(data as ListCategoriesResponse);
+    } catch (e) {
+      if (e instanceof Error) {
+        console.error(e.message);
+      } else {
+        console.error(e);
+      }
+      return [];
+    }
+  }
+
+  async listGlassTypes() {
+    try {
+      const endpoint = new URL(`${COCKTAIL_API_ENDPOINT}/list.php?g=list`);
+      const req = await fetch(endpoint, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          ...authHeaders(),
+        },
+      });
+      if (!req.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      const data = await req.json();
+      if (!data?.drinks || !Array.isArray(data.drinks))
+        throw new Error("Invalid data");
+      return mapRawGlassTypesResponse(data as ListGlassTypesResponse);
+    } catch (e) {
+      if (e instanceof Error) {
+        console.error(e.message);
+      } else {
+        console.error(e);
+      }
+      return [];
     }
   }
 }

@@ -10,9 +10,9 @@ export const resetStorage = () => {
 export const getItems = (): SavedCocktailI[] => {
   try {
     const res = localStorage.getItem(DRINKS_STORAGE_KEY);
-    if (!res) throw new Error("No items in storage");
+    if (!res) throw new Error("No item in storage");
     const items = JSON.parse(res);
-    if (!Array.isArray(items)) throw new Error("Items is not an array");
+    if (!Array.isArray(items)) throw new Error("'Items' is not an array");
     return items as SavedCocktailI[];
   } catch (e) {
     resetStorage();

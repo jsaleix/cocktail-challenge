@@ -1,7 +1,7 @@
 import cocktailService from "@/lib/services/cocktail.service";
 import { Modal } from "./modal";
 import React from "react";
-import mapRawDrink from "@/lib/utils/format";
+import { mapRawDrink } from "@/lib/utils/format";
 
 const fetchDrink = async (id: string) => {
   const res = await cocktailService.findDrinkById(id);

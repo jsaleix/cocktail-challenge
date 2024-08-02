@@ -1,6 +1,6 @@
 import DrinkBasis from "@/components/drink/basis";
 import cocktailService from "@/lib/services/cocktail.service";
-import mapRawDrink from "@/lib/utils/format";
+import { mapRawDrink } from "@/lib/utils/format";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
