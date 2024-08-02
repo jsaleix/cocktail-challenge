@@ -13,5 +13,5 @@ export async function searchDrinksByNameAction(name: string) {
 export async function searchDrinkByFiltersAction(filters: FiltersI) {
   "use server";
   const res = await cocktailService.searchDrinkByFilters(filters);
-  return res ? res.drinks : [];
+  return res;
 }

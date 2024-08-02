@@ -7,6 +7,7 @@ import {
   ListDrinksByIngredientResponse,
   ListGlassTypesResponse,
   ListIngredientsResponse,
+  SearchCocktailByFilterResponse,
   SearchCocktailResponse,
   SearchIngredientResponse,
 } from "../types/requests";
@@ -182,7 +183,6 @@ class CocktailService {
       const endpoint = new URL(
         `${COCKTAIL_API_ENDPOINT}/filter.php?${filtersToString}`
       );
-      console.log(endpoint.toString());
       const req = await fetch(endpoint, {
         method: "GET",
         headers: {
@@ -193,14 +193,19 @@ class CocktailService {
       if (!req.ok) {
         throw new Error("Failed to fetch data");
       }
-      return (await req.json()) as SearchCocktailResponse;
+      const data = (await req.json()) as SearchCocktailByFilterResponse;
+      if (Array.isArray(data?.drinks)) {
+        return data.drinks;
+      } else {
+        throw new Error("Invalid data");
+      }
     } catch (e) {
       if (e instanceof Error) {
         console.error(e.message);
       } else {
         console.error(e);
       }
-      return null;
+      return [];
     }
   }
 

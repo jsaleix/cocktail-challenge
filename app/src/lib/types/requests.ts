@@ -20,6 +20,10 @@ export interface SearchCocktailResponse {
   drinks: CocktailFullI[] | null;
 }
 
+export interface SearchCocktailByFilterResponse {
+  drinks: CocktailFullI[] | null | string; // WTF
+}
+
 export interface ListCategoriesResponse {
   drinks: Array<Record<"strCategory", string>>;
 }
