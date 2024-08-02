@@ -1,6 +1,6 @@
 "server-only";
 import { COCKTAIL_API_ENDPOINT } from "../config/endpoints";
-import { CocktailFullI, RawCocktailI } from "../types/cocktail";
+import { RawCocktailI } from "../types/cocktail";
 import {
   ListDrinksByIngredientResponse,
   ListIngredientsResponse,
@@ -189,5 +189,5 @@ class CocktailService {
     }
   }
 }
-
-export default new CocktailService();
+const service = new CocktailService();
+export default service;

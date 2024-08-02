@@ -89,7 +89,7 @@ function SearchIngredientPart({}: SearchIngredientPartProps) {
       const res = await searchIngredient(inputValue);
       if (res) setResults(res);
     }, 500);
-  }, [inputValue]);
+  }, [inputValue, searchIngredient]);
 
   return (
     <div className="flex flex-col gap-3">
