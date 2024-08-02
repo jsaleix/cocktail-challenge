@@ -29,7 +29,7 @@ export function Modal({ drink }: Props) {
     <div className="modal-backdrop" onClick={onDismiss}>
       <dialog
         ref={dialogRef}
-        className="modal bg-transparent w-100 lg:w-3/6"
+        className="modal bg-transparent h-screen lg:h-fit w-100 lg:w-3/6"
         onClose={onDismiss}
       >
         <div
@@ -37,7 +37,7 @@ export function Modal({ drink }: Props) {
             e.preventDefault();
             e.stopPropagation();
           }}
-          className="hideScrollBar flex flex-col gap-5 p-5 h-full w-full bg-dark-blue bg-opacity-5 shadow-2xl rounded-md"
+          className="hideScrollBar overflow-scroll flex flex-col gap-5 p-5 h-full w-full bg-dark-blue bg-opacity-5 shadow-2xl rounded-md"
         >
           <button
             onClick={onDismiss}
