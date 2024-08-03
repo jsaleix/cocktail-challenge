@@ -1,0 +1,38 @@
+name: Front test and deploy
+
+on:
+    push:
+        paths:
+            - "app/**"
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20.x
+
+            - name: Install dependencies
+              run: npm install
+              working-directory: ./app
+
+            - name: copy env file
+              run: cp .env.example .env
+              working-directory: ./app
+
+            - name: Try to build
+              run: npm run build
+              working-directory: ./app
+    deploy:
+        needs: build
+        runs-on: ubuntu-latest
+        if: github.ref == 'refs/heads/master'
+        env:
+            deploy_url: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        steps:
+            - name: Deploy to production
+              run: curl -X POST "$deploy_url"
