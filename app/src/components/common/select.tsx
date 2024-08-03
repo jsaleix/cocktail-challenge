@@ -10,7 +10,7 @@ export default function Select({ children, className, register, ...props }: Prop
       {...props}
       {...register}
       className={clsx(
-        "bg-background rounded-xl py-5 px-8 shadow-md outline-none",
+        "bg-background rounded-xl py-5 px-3 shadow-md outline-none",
         className
       )}
     >

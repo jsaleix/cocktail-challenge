@@ -69,9 +69,9 @@ export const SearchContextProvider = ({
   const processedDrinks = useMemo(() => {
     if (!hideSaved) return drinks;
     return drinks.filter((d) =>
-      savedDrinks.find((sd) => sd.idDrink !== d.idDrink)
+      !savedDrinks.find((sd) => sd.idDrink === d.idDrink)
     );
-  }, [hideSaved, drinks]);
+  }, [savedDrinks, hideSaved, drinks]);
 
   const setSearchType = (searchType: SearchType) => {
     if (

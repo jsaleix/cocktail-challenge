@@ -29,7 +29,7 @@ export function Modal({ drink }: Props) {
     <div className="modal-backdrop" onClick={onDismiss}>
       <dialog
         ref={dialogRef}
-        className="modal bg-transparent h-screen lg:h-fit w-100 lg:w-3/6"
+        className="modal bg-transparent h-screen lg:h-fit w-100 lg:w-3/6 slideInWithFade"
         onClose={onDismiss}
       >
         <div

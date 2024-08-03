@@ -29,7 +29,7 @@ export function InfoModal({ isOpen, close }: Props) {
         <div className="modal-backdrop" onClick={close}>
           <dialog
             ref={dialogRef}
-            className="modal bg-transparent h-72 w-100 lg:w-2/5"
+            className="modal bg-transparent h-72 w-100 lg:w-2/5 slideInWithFade"
             onClose={close}
           >
             <div
